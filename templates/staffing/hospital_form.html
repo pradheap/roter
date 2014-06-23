@@ -1,0 +1,5 @@
+from django import forms
+
+class HospitalForm(forms.Form):
+    name = forms.CharField()
+    details = forms.CharField(widget=forms.Textarea)

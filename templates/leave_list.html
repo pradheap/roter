@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}List of Leaves{% endblock %}
+
+{% block content %}
+
+{% if not leaves %}No leaves submitted yet.{% endif %}
+
+  <div class="table-repsonsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Staff Name</th>
+      <th>Leave Type</th>
+      <th>Leave From</th>
+      <th>Leave To</th>
+      <th>Applied On</th>
+      <th>Reason</th>
+      <th>Approved On</th>
+      <th>Comments</th>
+      <th>Decision</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for leave in leaves %}
+    <tr>
+      <td>{{ leave.staff.name }}</td>
+      <td>{{ leave.type }}</td>
+      <td>{{ leave.leave_from }}</td>
+      <td>{{ leave.leave_to }}</td>
+      <td>{{ leave.applied_on }}</td>
+      <td>{{ leave.reason }}</td>
+      <td>{{ leave.approved_on }}</td>
+      <td>{{ leave.comments }}</td>
+      <td>{{ leave.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

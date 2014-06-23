@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+
+{% block title %}Staff Registration{% endblock %}
+
+{% block content %}
+<div class="col-lg-6">
+<div class="well bs-component">
+<form class="form-horizontal" method="post" action="">
+  <fieldset>
+   <legend>Register</legend>
+    {% csrf_token %}
+      <div class="form-group {% if UserForm.mobile.errors %}has-error{% endif %}">
+        <label for="id_mobile" class="col-lg-2 control-label">Mobile:</label>
+        <div class="col-lg-10">
+          {% if UserForm.mobile.errors %}
+            <label class="control-label" for="id_mobile">{{ UserForm.mobile.errors }}</label>
+          {% endif %}
+          <input id="id_mobile" maxlength="10" class="form-control" name="mobile" type="text" value="{{UserForm.mobile.value|default_if_none:"" }}"/>
+        </div>
+      </div>
+      <div class="form-group {% if UserForm.name.errors %}has-error{% endif %}"">
+        <label for="id_name" class="col-lg-2 control-label">Name:</label>
+          <div class="col-lg-10">
+           {% if UserForm.name.errors %}
+             <label class="control-label" for="id_name">{{ UserForm.name.errors }}</label>
+           {% endif %} 
+           <input id="id_name" maxlength="40" class="form-control" name="name" type="text" value="{{UserForm.name.value|default_if_none:"" }}" />
+          </div>
+      </div>
+      <div class="form-group {% if UserForm.password1.errors %}has-error{% endif %}"">
+        <label for="id_password1" class="col-lg-2 control-label">Password:</label>
+          <div class="col-lg-10">
+            {% if UserForm.password1.errors %}
+              <label class="control-label" for="id_password1">{{ UserForm.password1.errors }}</label>
+            {% endif %}
+            <input id="id_password1" class="form-control" name="password1" type="password" value="{{UserForm.password1.value|default_if_none:"" }}"/>
+          </div>
+      </div>
+      <div class="form-group {% if UserForm.password2.errors %}has-error{% endif %}"">
+        <label for="id_password2" class="col-lg-2 control-label">Password confirmation:</label>
+        <div class="col-lg-10">
+          {% if UserForm.password2.errors %}
+            <label class="control-label" for="id_password2">{{ UserForm.password2.errors }}</label>
+          {% endif %}
+          <input id="id_password2" class="form-control" name="password2" type="password" value="{{UserForm.password2.value|default_if_none:"" }}"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button class="btn btn-default">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+  </fieldset>
+</form>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Details{% endblock %}
+
+{% block content %}
+
+<ul>
+    <p>
+    <div class="leave">Type: {{ leave.type }}</div>
+    <div class="leave">Leave From: {{ leave.leave_from }}</div>
+    <div class="leave">Leave To: {{ leave.leave_to }}</div>
+    <div class="leave">Applied On: {{ leave.applied_on }}</div>
+    <div class="leave">Reason: {{ leave.reason }}</div> 
+    <div class="leave">Status: {{ leave.status }}</div>
+    <div class="leave">Approved/Rejected On: {{ leave.approved_on }}</div>
+    <div class="leave">Comments: {{ leave.comments }}</div>
+    </p>
+</ul>
+
+{% endblock %}

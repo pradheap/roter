@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Details{% endblock %}
+
+{% block content %}
+
+<ul>
+    <p>
+    <div class="leave">Type: {{ leave.type }}</div>
+    <div class="leave">Location: {{ leave.leave_from }}</div>
+    <div class="leave">Details: {{ leave.leave_to }}</div>
+    <div class="leave">Type: {{ leave.applied_on }}</div>
+    <div class="leave">Status: {{ leave.status }}</div>
+    </p>
+</ul>
+
+<form method="post" action="">
+{% csrf_token %}
+<textarea name="comments" id="comments"></textarea>
+<p>
+<input type="submit" value="Approve Leave" name="approve"/>
+<input type="submit" value="Withhold Leave" name="withhold"/>
+<input type="submit" value="Reject Leave" name="reject"/>
+</p>
+</form>
+
+{% endblock %}

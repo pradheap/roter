@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Hospital Details{% endblock %}
+
+{% block content %}
+
+<ul>
+    <p>
+    <div class="ward">Name: {{ ward.name }}</div>
+    <div class="ward">Average Hours: {{ ward.average_hours }}</div>
+    <div class="ward">Type: {{ ward.type }}</div>
+    <div class="ward">Beds: {{ ward.beds }}</div>
+    <div class="ward">Seniors: {{ ward.seniors }}</div>
+    <div class="ward">Juniors: {{ ward.juniors }}</div>
+    <div class="ward">Midlevels: {{ ward.midlevels }}</div>
+    </p>
+</ul>
+
+{% endblock %}

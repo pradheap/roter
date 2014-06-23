@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Branch Details{% endblock %}
+
+{% block content %}
+
+<ul>
+    <p>
+    <div class="branch">Name: {{ branch.name }}</div>
+    <div class="branch">Location: {{ branch.location }}</div>
+    <div class="branch">Details: {{ branch.details }}</div>
+    <div class="branch">Type: {{ branch.type }}</div>
+    <li><a href="wards/">List of Wards</a></li>
+    </p>
+</ul>
+
+{% endblock %}

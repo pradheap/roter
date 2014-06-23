@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Shift Roster{% endblock title %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>Shift Details</div>
+    {{ shift_formset.as_p }}
+    <strong>You can always edit this after creating this roster until start date of this roster.</strong>
+    <input type="submit" name="add" value="Add another shift"/>
+    <input type="submit" name="submit" value="Submit"/>
+</form>
+{% endblock content %}

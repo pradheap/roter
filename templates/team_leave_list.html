@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}List of Leaves{% endblock %}
+
+{% block content %}
+
+{% if not leaves %}No leaves submitted yet.{% endif %}
+
+  <div class="table-repsonsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Staff Name</th>
+      <th>Leave Type</th>
+      <th>Leave From</th>
+      <th>Leave To</th>
+      <th>Applied On</th>
+      <th>Reason</th>
+      <th>Approved On</th>
+      <th>Comments</th>
+      <th>Take Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for leave in leaves %}
+    <tr>
+      <td>{{ leave.staff.name }}</td>
+      <td>{{ leave.type }}</td>
+      <td>{{ leave.leave_from }}</td>
+      <td>{{ leave.leave_to }}</td>
+      <td>{{ leave.applied_on }}</td>
+      <td>{{ leave.reason }}</td>
+      <td>{{ leave.approved_on }}</td>
+      <td>
+        {% if leave.status == 'open' %}
+          <form method="post" action="">
+            {% csrf_token %}
+            <div>Your comments:<textarea rows="5" cols="50" name="comments" required></textarea></div>
+        {% else %}
+          {{ leave.comments }}
+        {% endif %}
+      </td>
+      <td>
+        {% if leave.status == 'open' %}
+            <input type="submit" name="approve" value="Approve"/>
+            <input type="submit" name="reject" value="Reject"/>
+            <input type="submit" name="withhold" value="With Hold"/>
+            <input type="hidden" name="leaveid" value="{{leave.id}}"/>
+          </form>
+        {% else %}
+          {{ leave.status }}
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

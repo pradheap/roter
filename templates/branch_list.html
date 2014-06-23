@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}List of Branchs{% endblock %}
+
+{% block content %}
+
+<ul>
+  {% for branch in object_list %}
+    <p>
+    <div class="branch">Name: {{ branch.name }}</div>
+    <div class="branch">Location: {{ branch.location }}</div>
+    <div class="branch">Details: {{ branch.details }}</div>
+    <div class="branch">Type: {{ branch.type }}</div>
+    <a href="edit/{{branch.id}}">Edit this Details</a>
+    </p>
+  {% endfor %}
+</ul>
+
+{% endblock %}
