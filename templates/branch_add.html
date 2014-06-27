@@ -3,9 +3,12 @@
 {% block title %}Add a Branch{% endblock %}
 
 {% block content %}
+<div class="page-header">
+  <h2>Add a Branch</h2>
+</div>
 <form method="post" action="">
 {% csrf_token %}
 {{form.as_p}}
-<input type="submit" value="Add Branch"/>
+<button type="submit" class="btn btn-default">Add Branch</button>
 </form>
 {% endblock %}

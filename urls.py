@@ -32,5 +32,5 @@ urlpatterns = patterns('staffing.views',
 
 urlpatterns += patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'template_name':'registration/logout.html'}),
 )

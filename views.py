@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.core.urlresolvers import reverse
 from datetime import datetime, date
 from staffing.models import Branch, BranchForm, Leave, LeaveForm, Staff, Roster, \
-    Shift, RosterForm, ShiftFormset, WardForm, Ward, SupervisorForm, DetailsForm, Personal_Details
+    Shift, RosterForm, ShiftFormset, WardForm, Ward, Supervisor, SupervisorForm, DetailsForm, Personal_Details
 from staffing.forms import UserCreationForm
 
 # Create your views here.
@@ -14,22 +14,27 @@ def index(request):
     return render_to_response('index.html', RequestContext(request,))
 
 def reporting_staff_add(request):
+    team = Supervisor.objects.filter(supervisor=request.user).values('staff')
+    team_details = Personal_Details.objects.filter(staff__in = team)
     form = SupervisorForm(request.user.mobile, request.POST or None)
     if form.is_valid():
         reporting_staff = form.save(commit=False)
         reporting_staff.supervisor = request.user
         reporting_staff.save()
         return  HttpResponseRedirect("/staffing/")
-    return render_to_response('reporting_staff_add.html', RequestContext(request, {'form': form}))
+    return render_to_response('reporting_staff_add.html', RequestContext(request, {'form': form, 'team': team_details}))
 
 def details_add(request):
     form = DetailsForm(request.POST or None)
+    if form.is_valid():
+        details = form.save()
+        return  HttpResponseRedirect("/staffing/")
     return render_to_response('details_add.html', RequestContext(request, {'form': form}))
 
 def team_leave_list(request):
     if request.POST and 'leaveid' in request.POST:
         leave_approve(request, request.POST['leaveid']) 
-    team = Personal_Details.objects.filter(supervisor=request.user)
+    team = Supervisor.objects.filter(supervisor=request.user)
     leaves = Leave.objects.filter(staff_id__in=team.values('staff_id'))
     return render_to_response('team_leave_list.html', RequestContext(request, {'leaves': leaves}))    
 
@@ -61,6 +66,8 @@ class ListBranchView(ListView):
     template_name = 'branch_list.html'
 
 def staff_add(request):
+    if request.user and getattr(request.user, "name", None):
+        return HttpResponseRedirect("/staffing/")
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         new_staff = form.save()

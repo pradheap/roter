@@ -3,9 +3,65 @@
 {% block title %}Request Leave{% endblock %}
 
 {% block content %}
-<form method="post" action="">
+<div class="col-lg-5">
+<div class="page-header">
+  <h2 id="container">Request Leave</h2>
+</div>
+<form class="form-horizontal" method="post" action="">
 {% csrf_token %}
-{{LeaveForm.as_p}}
-<input type="submit" value="Request Leave"/>
+      <div class="form-group {% if LeaveForm.type.errors %}has-error{% endif %}">
+        <label for="id_type" class="col-lg-3 control-label">Type:</label>
+        <div class="col-lg-7">
+          {% if LeaveForm.type.errors %}
+            <label class="control-label" for="id_type">{{ LeaveForm.type.errors }}</label>
+          {% endif %}
+          <input id="id_type" maxlength="10" class="form-control" name="type" type="text" value="{{LeaveForm.type.value|default_if_none:"" }}"/>
+        </div>
+      </div>
+      <div class="form-group {% if LeaveForm.id_leave_from.errors %}has-error{% endif %}">
+        <label for="id_leave_from" class="col-lg-3 control-label">From:</label>
+        <div class="col-lg-7">
+          {% if LeaveForm.leave_from.errors %}
+            <label class="control-label" for="id_leave_from">{{ LeaveForm.leave_from.errors }}</label>
+          {% endif %}
+          <input id="id_leave_from" maxlength="10" class="form-control" name="leave_from" type="text" value="{{LeaveForm.leave_from.value|default_if_none:"" }}"/>
+        </div>
+      </div>
+      <div class="form-group {% if LeaveForm.leave_to.errors %}has-error{% endif %}">
+        <label for="id_leave_to" class="col-lg-3 control-label">To:</label>
+        <div class="col-lg-7">
+          {% if LeaveForm.leave_to.errors %}
+            <label class="control-label" for="id_leave_to">{{ LeaveForm.leave_to.errors }}</label>
+          {% endif %}
+          <input id="id_leave_to" maxlength="10" class="form-control" name="leave_to" type="text" value="{{LeaveForm.leave_to.value|default_if_none:"" }}"/>
+        </div>
+      </div>
+      <div class="form-group {% if LeaveForm.reason.errors %}has-error{% endif %}">
+        <label for="id_reason" class="col-lg-3 control-label">Reason:</label>
+        <div class="col-lg-7">
+          {% if LeaveForm.reason.errors %}
+            <label class="control-label" for="id_reason">{{ LeaveForm.reason.errors }}</label>
+          {% endif %}
+          <textarea cols="50" rows="5" id="id_reason" class="form-control" name="reason">{{LeaveForm.reason.value|default_if_none:"" }}</textarea>
+        </div>
+      </div>
+    <div class="col-lg-10 col-lg-offset-4">
+      <button class="btn btn-primary" type="submit">Request Leave</button>
+    </div>
 </form>
+</div>
+<script type="text/javascript">
+  $('#id_leave_from').datepicker({
+    format: "yyyy-mm-dd",
+    startDate: "0d",
+    autoclose: true,
+    todayHighlight: true
+  });
+  $('#id_leave_to').datepicker({
+    format: "yyyy-mm-dd",
+    startDate: "0d",
+    autoclose: true,
+    todayHighlight: true
+  });
+</script>
 {% endblock %}

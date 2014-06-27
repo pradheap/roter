@@ -3,9 +3,17 @@
 {% block title %}Add Reporting Staff{% endblock %}
 
 {% block content %}
+<div class="page-header">
+  <h2>Add Staff</h2>
+</div>
+<div>
+{% for t in team %}
+   {{t.full_name}}
+{% endfor %}
+</div>
 <form method="post" action="">
 {% csrf_token %}
 {{form.as_p}}
-<input type="submit" value="Add"/>
+<button type="submit" class="btn btn-default">Add</button>
 </form>
 {% endblock %}

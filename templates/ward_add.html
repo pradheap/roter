@@ -3,9 +3,12 @@
 {% block title %}Add a Ward{% endblock %}
 
 {% block content %}
+<div class="page-header">
+  <h2>Add a Ward</h2>
+</div>
 <form method="post" action="">
 {% csrf_token %}
 {{WardForm.as_p}}
-<input type="submit" value="Add Ward"/>
+<button type="submit" class="btn btn-default">Add Ward</button>
 </form>
 {% endblock %}

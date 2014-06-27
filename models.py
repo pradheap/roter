@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.forms.models import inlineformset_factory
 from django.forms import ModelForm
@@ -96,9 +97,25 @@ class Contact(models.Model):
     perm_address = models.TextField(blank=True, null=True)
     email = models.EmailField(max_length=80, blank=True, null=True)
 
+class Supervisor(models.Model):
+    staff = models.ForeignKey(Staff, related_name = 'staff')
+    supervisor = models.ForeignKey(Staff, related_name = 'supervisor')
+    start_date = models.DateField(default=datetime.datetime.now, null=True)
+    end_date = models.DateField(blank=True, null=True)
+
+class SupervisorForm(ModelForm):
+    def __init__(self,mobile,*args,**kwargs):
+        super (SupervisorForm,self ).__init__(*args,**kwargs)
+        #Exclude Staffs who are already assigned with supervisors.
+        exclude_staffs = Supervisor.objects.filter().values('staff')
+        self.fields['staff'].queryset = Staff.objects.filter(groups__name='Nurse').filter(~Q(mobile=mobile)).exclude(id__in = exclude_staffs)
+
+    class Meta:
+        model = Supervisor
+        fields = ('staff', 'start_date', 'end_date',)
+
 class Personal_Details(models.Model):
     staff = models.ForeignKey(Staff)
-    supervisor = models.ForeignKey(Staff, related_name = 'supervisor', blank=True, null=True)
     branch = models.ForeignKey(Branch, blank=True, null=True)
     full_name = models.CharField(max_length=120, blank=True, null=True)
     qualification = models.CharField(max_length=80, blank=True, null=True)
@@ -116,20 +133,10 @@ class Personal_Details(models.Model):
     employee_status = models.CharField(max_length=16, blank=True, null=True)
     employment_status = models.CharField(max_length=16, blank=True, null=True)
 
-class SupervisorForm(ModelForm):
-    def __init__(self,mobile,*args,**kwargs):
-        super (SupervisorForm,self ).__init__(*args,**kwargs)
-        self.fields['staff'].queryset = Staff.objects.filter(groups__name='Nurse').filter(~Q(mobile=mobile))
-
-    class Meta:
-        model = Personal_Details
-        fields = ('staff',)
-
 class DetailsForm(ModelForm):
 
     class Meta:
         model = Personal_Details
-        fields = ('full_name','qualification','doj','dob','dol','hours_agreed','company_name','designation', 'department', 'sub_department', 'marital_status', 'blood_group', 'location')
 
 class Certification(models.Model):
     staff = models.ForeignKey(Staff)

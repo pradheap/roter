@@ -8,4 +8,18 @@
 {{form.as_p}}
 <input type="submit" value="Add"/>
 </form>
+<script type="text/javascript">
+  $('#id_leave_from').datepicker({
+    format: "yyyy-mm-dd",
+    startDate: "0d",
+    autoclose: true,
+    todayHighlight: true
+  });
+  $('#id_leave_to').datepicker({
+    format: "yyyy-mm-dd",
+    startDate: "0d",
+    autoclose: true,
+    todayHighlight: true
+  });
+</script>
 {% endblock %}

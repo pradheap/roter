@@ -4,15 +4,15 @@
 {% block title %}Staff Registration{% endblock %}
 
 {% block content %}
-<div class="col-lg-6">
+<div class="col-lg-5">
 <div class="well bs-component">
 <form class="form-horizontal" method="post" action="">
   <fieldset>
    <legend>Register</legend>
     {% csrf_token %}
       <div class="form-group {% if UserForm.mobile.errors %}has-error{% endif %}">
-        <label for="id_mobile" class="col-lg-2 control-label">Mobile:</label>
-        <div class="col-lg-10">
+        <label for="id_mobile" class="col-lg-3 control-label">Mobile:</label>
+        <div class="col-lg-7">
           {% if UserForm.mobile.errors %}
             <label class="control-label" for="id_mobile">{{ UserForm.mobile.errors }}</label>
           {% endif %}
@@ -20,8 +20,8 @@
         </div>
       </div>
       <div class="form-group {% if UserForm.name.errors %}has-error{% endif %}"">
-        <label for="id_name" class="col-lg-2 control-label">Name:</label>
-          <div class="col-lg-10">
+        <label for="id_name" class="col-lg-3 control-label">Name:</label>
+          <div class="col-lg-7">
            {% if UserForm.name.errors %}
              <label class="control-label" for="id_name">{{ UserForm.name.errors }}</label>
            {% endif %} 
@@ -29,8 +29,8 @@
           </div>
       </div>
       <div class="form-group {% if UserForm.password1.errors %}has-error{% endif %}"">
-        <label for="id_password1" class="col-lg-2 control-label">Password:</label>
-          <div class="col-lg-10">
+        <label for="id_password1" class="col-lg-3 control-label">Password:</label>
+          <div class="col-lg-7">
             {% if UserForm.password1.errors %}
               <label class="control-label" for="id_password1">{{ UserForm.password1.errors }}</label>
             {% endif %}
@@ -38,8 +38,8 @@
           </div>
       </div>
       <div class="form-group {% if UserForm.password2.errors %}has-error{% endif %}"">
-        <label for="id_password2" class="col-lg-2 control-label">Password confirmation:</label>
-        <div class="col-lg-10">
+        <label for="id_password2" class="col-lg-3 control-label">Password confirmation:</label>
+        <div class="col-lg-7">
           {% if UserForm.password2.errors %}
             <label class="control-label" for="id_password2">{{ UserForm.password2.errors }}</label>
           {% endif %}
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
+        <div class="col-lg-7 col-lg-offset-3">
           <button class="btn btn-default">Cancel</button>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>

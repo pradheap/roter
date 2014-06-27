@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}List of Branchs{% endblock %}
+{% block title %}List of Branches{% endblock %}
 
 {% block content %}
-
+<div class="page-header">
+  <h2>Branches List</h2>
+</div>
 <ul>
   {% for branch in object_list %}
     <p>

@@ -5,7 +5,9 @@
 {% block content %}
 
 {% if not leaves %}No leaves submitted yet.{% endif %}
-
+<div class="page-header">
+<h2>Subordinates Leave History</h2>
+</div>
   <div class="table-repsonsive">
 <table class="table table-striped">
   <thead>
@@ -42,10 +44,12 @@
       </td>
       <td>
         {% if leave.status == 'open' %}
-            <input type="submit" name="approve" value="Approve"/>
-            <input type="submit" name="reject" value="Reject"/>
-            <input type="submit" name="withhold" value="With Hold"/>
+          <div class="btn-group-vertical">
+            <button type="submit" class="btn btn-success" name="approve">Approve</button>
+            <button type="submit" name="reject" class="btn btn-danger">Reject</button>
+            <button type="submit" name="withhold" class="btn btn-warning">With Hold</button>
             <input type="hidden" name="leaveid" value="{{leave.id}}"/>
+          </div>
           </form>
         {% else %}
           {{ leave.status }}
